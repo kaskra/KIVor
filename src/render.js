@@ -1,71 +1,56 @@
 const electron = require('electron');
-const lawApi = require('./api_calls');
+const lawApi = require('./fetch_laws');
 const nlp = require('./fake_nlp');
+const suggestion = require('./components/suggestion');
 
 const textArea = document.getElementById('mainTextArea');
 const suggestionList = document.getElementById('suggestionList');
 const detailCard = document.getElementById('detail_card');
+
 const checkBtn = document.getElementById('checkTextBtn');
 
-checkBtn.onclick = oldQuery;
+checkBtn.onclick = getSuggestions;
 
+function createEntryInSuggestions(title, text) {
+    let newSuggestion = suggestion.buildSuggestionItem(title, text, 90);
 
-async function getSuggestions() {
-    // TODO language model anwenden?
-
-
-    const text = textArea.value;
-    console.log(text);
-
-    const li = document.createElement('li');
-    const itemText = document.createTextNode(text);
-    li.appendChild(itemText);
-
-    // li.className = "card";
-    suggestionList.appendChild(li);
-
-    // li onclick open detailsBox
-
+    suggestionList.innerHTML += newSuggestion;
     detailCard.hidden = false;
 }
 
-function createEntryInSuggestions(json){
-    let body = json['title'];
-    console.log(body);
-}
-
-async function oldQuery() {
+async function getSuggestions() {
     const text = textArea.value;
+
+    // TODO language model anwenden?
     const results = nlp.searchForKeywords(text);
 
-    console.log(results);
-    if (results[0] !== ""){
+
+    if (results[0] !== "") {
         let key = results[0];
         let ps = results[1].join(',');
-        let book_code = nlp.lawBook;
 
+        // TODO
         console.log(key);
         console.log(ps);
-        console.log(book_code);
 
-        const paragraphs = lawApi.fetchLaws(book_code, '', key);
-        // let paragraphs = lawApi.fetchLaw(book_code, '', key);
-        // paragraphs.then(
-        //     p => {
-        //         for (let i=0; i <= p['results'].length; i++){
-        //             createEntryInSuggestions(p['results'][i]);
-        //         }
-        //
-        //     }
-        // )
+        const paragraphs = lawApi.fetchLaws(nlp.lawBook, '', key);
+        paragraphs.then(
+            p => {
+                // Clear suggestion list if new suggestions were found
+                if (p.length > 0) {
+                    suggestionList.innerHTML = '';
+                }
 
-        console.log(paragraphs);
+                for (let i = 0; i < p.length; i++) {
+                    createEntryInSuggestions(p[i].title, p[i].text);
+                }
+
+            }
+        )
     }
 
 
-
 }
-
 
 
 let exampleText = "Um 17:45 Uhr am 17.06.2020 erfolgte die Anweisung durch das FLZ die Siberstraße 19 " +
@@ -89,7 +74,6 @@ let exampleText = "Um 17:45 Uhr am 17.06.2020 erfolgte die Anweisung durch das F
     "Frau in Empfang genommen. ";
 
 textArea.value = exampleText;
-
 
 
 const detailText = document.getElementById('detail_text');

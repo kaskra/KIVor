@@ -19,7 +19,7 @@
                 <div class="card-body">
                     <textarea class="form-control mb-1 " id="mainTextArea" rows="18" style="resize:none; "></textarea>
                     <button class="btn btn-outline-primary" id="checkTextBtn">Überprüfen</button>
-                   </div>
+                </div>
             </div>
             <div class="card mt-1 mr-1 rounded-0 border-top" id="detail_card" hidden>
                 <div class="card-body">
@@ -27,27 +27,34 @@
                     <p class="card-text" id="detail_text">adafsdfewsdfsdfsdfsfsdfadwa</p>
                 </div>
             </div>
-{% comment %} http://photonkit.com/getting-started/ {% endcomment %}
-{% comment %} https://github.com/connors/photon/blob/master/docs/dist/css/photon.css#L206 {% endcomment %}
+            {% comment %} http://photonkit.com/getting-started/ {% endcomment %}
+            {% comment %} https://github.com/connors/photon/blob/master/docs/dist/css/photon.css#L206 {% endcomment %}
         </div>
         <div class="col-4 px-0">
             <div class=" card rounded-0">
                 <div class="card-header">Vorschläge</div>
-                <div class="card-body">
-                    <ul id="suggestionList">
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
+                <div class="card-body px-0 py-0">
+                    <!--                    <ul id="suggestionList" class="list-group">-->
+                    <!--                        <li class="list-group-item">-->
+                    <!--                            <div class="card">-->
+                    <!--                                <div class="card-body">-->
+                    <!--                                    <h5 class="card-title">Card title</h5>-->
+                    <!--                                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>-->
+                    <!--                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                        </li>-->
+                    <!--                        <li class="list-group-item-info">-->
+                    <!--                            <div class="card">-->
+                    <!--                                <div class="card-body">-->
+                    <!--                                    <h5 class="card-title">Card title</h5>-->
+                    <!--                                    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>-->
+                    <!--                                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                        </li>-->
+                    <!--                    </ul>-->
+                    <div class="list-group rounded-0" id="suggestionList"></div>
                 </div>
             </div>
         </div>
