@@ -5,7 +5,7 @@ const suggestion = require('./components/suggestion');
 
 const textArea = document.getElementById('mainTextArea');
 const suggestionList = document.getElementById('suggestionList');
-const detailCard = document.getElementById('detail_card');
+const detailCard = document.getElementById('details-card');
 
 const checkBtn = document.getElementById('checkTextBtn');
 
@@ -45,6 +45,11 @@ async function getSuggestions() {
                     createEntryInSuggestions(p[i].title, p[i].text);
                 }
 
+                for (let i = 0; i < 8; i++) {
+                    createEntryInSuggestions("StGB $ 223 Körperverletzung", "(1) Wer eine andere Person körperlich mißhandelt oder an der Gesundheit schädigt, wird mit Freiheitsstrafe bis zu fünf Jahren oder mit Geldstrafe bestraft.\n" +
+                        "\n" +
+                        "(2) Der Versuch ist strafbar.");
+                }
             }
         )
     }
