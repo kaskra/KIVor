@@ -14,6 +14,8 @@ const createWindow = () => {
     const mainWindow = new BrowserWindow({
         width: 1200,
         height: 800,
+        x: 2560 - 1200,
+        y: 0,
         autoHideMenuBar: true,
         resizable: false,
         useContentSize: true,
@@ -30,7 +32,7 @@ const createWindow = () => {
 
 
     // Open the DevTools.
-    // mainWindow.webContents.openDevTools();
+    mainWindow.webContents.openDevTools();
 };
 
 const mainMenuTemplate = [];
