@@ -36,6 +36,11 @@ async function fetchLaws(bookCode, title, text) {
         }
     });
 
+    if (response.status === 429) {
+        alert("Ihre heutige Anzahl an Requests ist aufgebraucht!");
+        return [];
+    }
+
     return await response.json().then(
         p => {
             let res = [];
