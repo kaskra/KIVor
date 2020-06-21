@@ -2,12 +2,6 @@ module.exports = {
     buildSuggestionItem: _buildSuggestionItem,
 };
 
-const detailCard = document.getElementById('details-card');
-
-function showDetails() {
-
-}
-
 function _buildSuggestionItem(title, text, index) {
     const splitTitle = title.split(' ');
     // Get the next (add 2 because upper limit of splice is exclusive).
