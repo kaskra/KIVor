@@ -1,3 +1,5 @@
+const {dialog} = require('electron').remote;
+
 const lawApi = require('./fetch_laws');
 const nlp = require('./fake_nlp');
 const suggestion = require('./components/suggestion');
@@ -11,7 +13,53 @@ checkboxKeywords.onclick = toggleKeywords;
 const checkBtn = document.getElementById('checkTextBtn');
 checkBtn.onclick = getSuggestions;
 
+const searchParagraphBtn = document.getElementById('search-paragraph');
+searchParagraphBtn.onclick = searchByParagraph;
+
+
+const detailsClose = document.getElementById('details-close');
+detailsClose.onclick = function () {
+    unselectListItems();
+    resetDetails();
+}
+
+//-------------------------------------
+
 let keywordSearch = true;
+
+
+function searchByParagraph() {
+    const searchInput = document.getElementById('paragraph-input');
+    let query = searchInput.value;
+
+    const paragraphs = lawApi.fetchLaws(nlp.lawBook, query, '');
+
+    paragraphs.then(
+        p => {
+            if (p.length > 0) {
+                suggestionList.innerHTML = '';
+
+                for (let i = 0; i < p.length; i++) {
+                    createEntryInSuggestions(p[i].title, p[i].text, i);
+                }
+                addEventToItems();
+            } else {
+                dialog.showErrorBox("Kein Ergebnis",
+                    "Es konnten keine passenden Paragraphen gefunden werden.");
+
+                // TODO remove
+                suggestionList.innerHTML = '';
+                createEntryInSuggestions("StGB § 223 Körperverletzung", "(1) Wer eine andere " +
+                    "Person körperlich mißhandelt oder " +
+                    "an der Gesundheit schädigt, wird mit Freiheitsstrafe bis zu fünf Jahren " +
+                    "oder mit Geldstrafe bestraft.\n" +
+                    "\n" +
+                    "(2) Der Versuch ist strafbar.\n", 0);
+                addEventToItems();
+            }
+        }
+    );
+}
 
 function createEntryInSuggestions(title, text, idx) {
     let newSuggestion = suggestion.buildSuggestionItem(title, text, idx);
@@ -19,10 +67,35 @@ function createEntryInSuggestions(title, text, idx) {
     suggestionList.innerHTML += newSuggestion;
 }
 
-function addEventToItems() {
+function unselectListItems() {
+    for (let card of suggestionList.children) {
+        card.classList.remove('active');
+        card.children[0].classList.remove('selected-card');
+        card.children[1].classList.remove('selected-card');
+        card.children[2].classList.remove('selected-card');
+    }
+}
+
+function setAndShowDetails(title, text) {
     const detailCard = document.getElementById('details-card');
     const detailsTitle = document.getElementById('details-title');
     const detailsText = document.getElementById('details-text');
+    detailsTitle.innerText = title;
+    detailsText.innerText = text;
+    detailCard.hidden = false;
+}
+
+function resetDetails() {
+    const detailCard = document.getElementById('details-card');
+    const detailsTitle = document.getElementById('details-title');
+    const detailsText = document.getElementById('details-text');
+    detailsTitle.innerText = '';
+    detailsText.innerText = '';
+    detailCard.hidden = true;
+}
+
+function addEventToItems() {
+
     for (let c = 0; c < suggestionList.childElementCount; c++) {
         let item = suggestionList.children[c]
         let title = item.children[0].innerText;
@@ -30,20 +103,12 @@ function addEventToItems() {
         let text = item.children[2].innerText;
 
         item.onclick = function () {
-            for (let card of suggestionList.children) {
-                card.classList.remove('active');
-                card.children[0].classList.remove('selected-card');
-                card.children[1].classList.remove('selected-card');
-                card.children[2].classList.remove('selected-card');
-            }
-
+            unselectListItems();
             item.classList.add('active');
             item.children[0].classList.add('selected-card');
             item.children[1].classList.add('selected-card');
             item.children[2].classList.add('selected-card');
-            detailsTitle.innerText = title + " " + subtitle;
-            detailsText.innerText = text;
-            detailCard.hidden = false;
+            setAndShowDetails(title + " " + subtitle, text);
         }
     }
 }
@@ -68,7 +133,7 @@ async function getSuggestions() {
         paragraphs.then(
             p => {
                 // Clear suggestion list if new suggestions were found
-                if (p.length > 0) {
+                if (p.length >= 0) {
                     suggestionList.innerHTML = '';
                 }
 
@@ -76,12 +141,15 @@ async function getSuggestions() {
                     createEntryInSuggestions(p[i].title, p[i].text, i);
                 }
 
+                // TODO remove
                 if (p.length === 0) {
-                    for (let i = 0; i < 8; i++) {
-                        createEntryInSuggestions("StGB § 223 Körperverletzung", "(1) Wer eine andere Person körperlich mißhandelt oder an der Gesundheit schädigt, wird mit Freiheitsstrafe bis zu fünf Jahren oder mit Geldstrafe bestraft.\n" +
-                            "\n" +
-                            "(2) Der Versuch ist strafbar.", i);
-                    }
+                    createEntryInSuggestions("StGB § 223 Körperverletzung", "(1) Wer eine andere " +
+                        "Person körperlich mißhandelt oder " +
+                        "an der Gesundheit schädigt, wird mit Freiheitsstrafe bis zu fünf Jahren " +
+                        "oder mit Geldstrafe bestraft.\n" +
+                        "\n" +
+                        "(2) Der Versuch ist strafbar.\n", 0);
+
                 }
 
                 addEventToItems();
@@ -92,10 +160,6 @@ async function getSuggestions() {
 
 function toggleKeywords() {
     keywordSearch = checkboxKeywords.checked;
-
-    if (suggestionList.innerHTML !== '') {
-        getSuggestions();
-    }
 }
 
 

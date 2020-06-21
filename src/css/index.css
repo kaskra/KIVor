@@ -13,6 +13,14 @@ body {
     margin-bottom: 48px;
 }
 
+.fixed-header.left {
+    left: 0;
+}
+
+.fixed-header.right {
+    border-left: 2px solid #fff;
+}
+
 .header-offset {
     margin-top: 48px;
 }
@@ -36,5 +44,9 @@ body {
 }
 
 .selected-card {
+    color: #fff;
+}
+
+.btn:hover .icon {
     color: #fff;
 }

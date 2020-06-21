@@ -1,7 +1,6 @@
 // Main process
 // app -> lifecycle of app (event based)
-const {app, BrowserWindow, Menu} = require('electron');
-const url = require('url');
+const {app, BrowserWindow, Menu, ipcMain} = require('electron');
 const path = require('path');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -21,7 +20,8 @@ const createWindow = () => {
         useContentSize: true,
         webPreferences: {
             nodeIntegration: true,
-        }
+            enableRemoteModule: true,
+        },
     });
 
     // and load the index.html of the app.

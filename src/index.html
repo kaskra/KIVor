@@ -15,27 +15,50 @@
 <div class="window">
     <div class="window-content">
         <div class="pane-group">
-            <div class="pane mr-1">
+            <div class="pane mr-1 header-offset">
                 <div class="card rounded-0">
-                    <div class="card-header rounded-0">Vorgangsbeschreibung</div>
+                    <div class="card-header rounded-0 fixed-header left">Vorgangsbeschreibung</div>
                     <div class="card-body">
                             <textarea class="form-control mb-1 " id="mainTextArea" rows="18"
                                       style="resize:none; "></textarea>
-                        <button class="btn btn-outline-primary" id="checkTextBtn">Überprüfen</button>
+                        <div class="row justify-content-between">
+
+                            <div class="ml-3 d-inline-flex">
+                                <span class="col-form-label pr-3"> Suche direkt nach Paragraphen:</span>
+                                <input type="search" placeholder="223" id="paragraph-input"/>
+                                <button class="btn btn-outline-primary ml-1" style="color: #fff" id="search-paragraph">
+                                    <i class="icon icon-search"></i></button>
+                            </div>
+
+                            <div class="mr-3">
+                                <button class="btn btn-outline-primary" id="checkTextBtn">Überprüfen</button>
+                            </div>
+
+                        </div>
+
                     </div>
                 </div>
 
-                <div class="card rounded-0" id="details-card">
+                <div class="card rounded-0" id="details-card" hidden>
                     <div class="card-body">
-                        <h5 class="card-title" id="details-title"></h5>
+                        <div class="row justify-content-between">
+                            <div class="col-11">
+                                <h5 class="card-title" id="details-title"></h5>
+                            </div>
+                            <div class="col-1">
+                                <a class="close" id="details-close">X</a>
+                            </div>
+
+                        </div>
                         <p class="card-text" id="details-text"></p>
                     </div>
                 </div>
 
             </div>
             <div class="pane pane-sm sidebar header-offset">
-                <div class="card-header rounded-0 fixed-header">Vorschläge
-                        <input class="checkbox-inline ml-2" type="checkbox" id="toggleKeywords" checked> Suche nach Keywords</input>
+                <div class="card-header rounded-0 fixed-header right">Vorschläge
+                    <input class="checkbox-inline ml-2" type="checkbox" id="toggleKeywords" checked> Suche nach
+                    Keywords</input>
                 </div>
                 <div class="card-body px-0 py-0">
                     <div class="list-group rounded-0" id="suggestionList"></div>
@@ -46,39 +69,6 @@
         </div>
     </div>
 </div>
-
-
-<!--<div class="container-fluid px-8 py-0">-->
-<!--    <div class="row">-->
-<!--        <div class="col-8 px-0">-->
-<!--            <div class="card mr-1 rounded-0">-->
-<!--                <div class="card-header">Vorgangsbeschreibung</div>-->
-<!--                <div class="card-body">-->
-<!--                    <textarea class="form-control mb-1 " id="mainTextArea" rows="18" style="resize:none; "></textarea>-->
-<!--                    <button class="btn btn-outline-primary" id="checkTextBtn">Überprüfen</button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="card mt-1 mr-1 rounded-0 border-top" id="detail_card" hidden>-->
-<!--                <div class="card-body">-->
-<!--                    <h5 class="card-title" id="detail_title">§ 223 ....</h5>-->
-<!--                    <p class="card-text" id="detail_text">adafsdfewsdfsdfsdfsfsdfadwa</p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            {% comment %} http://photonkit.com/getting-started/ {% endcomment %}-->
-<!--            {% comment %} https://github.com/connors/photon/blob/master/docs/dist/css/photon.css#L206 {% endcomment %}-->
-<!--        </div>-->
-<!--        <div class="col-4 px-0">-->
-<!--            <div class=" card rounded-0">-->
-<!--                <div class="card-header">Vorschläge</div>-->
-<!--                <div class="card-body px-0 py-0">-->
-<!--                    <div class="list-group rounded-0" id="suggestionList"></div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
-<!--</div>-->
-
 
 </body>
 

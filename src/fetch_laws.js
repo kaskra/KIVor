@@ -2,6 +2,8 @@ module.exports = {
     fetchLaws: fetchLaws,
 };
 
+const {dialog} = require('electron').remote;
+
 /**
  * Data transfer class to make access of response of law book api easier.
  */
@@ -37,7 +39,8 @@ async function fetchLaws(bookCode, title, text) {
     });
 
     if (response.status === 429) {
-        alert("Ihre heutige Anzahl an Requests ist aufgebraucht!\n(Limitierung der Datenbank)");
+        dialog.showErrorBox("Abfragefehler", "Ihre heutige Anzahl an Requests ist aufgebraucht!\n(Limitierung der Datenbank)");
+
         return [];
     }
 
