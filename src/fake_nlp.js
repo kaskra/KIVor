@@ -4,20 +4,20 @@ module.exports = {
 };
 
 const mapping = {
-    'waffe': [],
-    'krankenhaus': [],
-    'opfer': [],
-    'gewalt': [],
+    'waffe': ['250', '177', '224', '244'],
+    'krankenhaus': ['66b', '71', '63', '67a', '223'],
+    'opfer': ['238', '177', '239', '221', '178', '223'],
+    'gewalt': ['223', '229', '224', '227', '231'],
     'raub': ['177', '244a', '316a', '260'],
-    'tod': [],
-    'vergewaltigung': [],
-    'strafe': [],
-    'geld': [],
-    'notwehr': [],
-    'tat': [],
-    'verteidigung': [],
-    'angriff': [],
-    'körperverletzung': [],
+    'tod': ['222', '251', '231', '306c', '176b'],
+    'vergewaltigung': ['177', '178', '176b'],
+    'strafe': ['145d', '258', '67', '59c'],
+    'geld': ['146', '149', '150', '147'],
+    'notwehr': ['32', '33'],
+    'tat': ['145d'],
+    'verteidigt': ['32', '33'],
+    'angriff': ['224', '223', '226', '227'],
+    'körperverletzung': ['223', '229', '224', '227', '231'],
 };
 
 function searchForKeywords(text) {
@@ -36,5 +36,3 @@ function searchForKeywords(text) {
     return [maxKey, mapping[maxKey]];
 }
 
-// nach wörtern in text suchen...
-// die mit den meisten vorkommen unterschiedlicher keywords als bestes gewichten
