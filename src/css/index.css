@@ -1,0 +1,32 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.fixed-header {
+    border-top: 1px solid rgba(0, 0, 0, .125);
+    border-bottom: 1px solid rgba(0, 0, 0, .125);
+    border-radius: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2;
+    margin-bottom: 48px;
+}
+
+.header-offset {
+    margin-top: 48px;
+}
+
+.card-header {
+    background: #363636;
+    color: white;
+}
+
+.pane-sm {
+    max-width: 30%;
+    min-width: 15%;
+}
+
+.pane {
+    border-left: 1px solid rgba(0, 0, 0, .125);
+}

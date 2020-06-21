@@ -35,8 +35,10 @@ function addEventToItems() {
 
 async function getSuggestions() {
     const text = textArea.value;
+    // TODO only get marked text if marked
+    // TODO Add as Info-Icon
 
-    // TODO language model anwenden?
+    // Search (marked) text for keywords.
     const results = nlp.searchForKeywords(text);
 
 
