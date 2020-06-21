@@ -5,9 +5,13 @@ const suggestion = require('./components/suggestion');
 const textArea = document.getElementById('mainTextArea');
 const suggestionList = document.getElementById('suggestionList');
 
+const checkboxKeywords = document.getElementById('toggleKeywords');
+checkboxKeywords.onclick = toggleKeywords;
+
 const checkBtn = document.getElementById('checkTextBtn');
 checkBtn.onclick = getSuggestions;
 
+let keywordSearch = true;
 
 function createEntryInSuggestions(title, text, idx) {
     let newSuggestion = suggestion.buildSuggestionItem(title, text, idx);
@@ -46,11 +50,10 @@ async function getSuggestions() {
         let key = results[0];
         let ps = results[1].join(',');
 
-        // TODO
-        console.log(key);
-        console.log(ps);
+        const paragraphs = lawApi.fetchLaws(nlp.lawBook,
+            (keywordSearch) ? '' : ps,
+            (keywordSearch) ? key : '');
 
-        const paragraphs = lawApi.fetchLaws(nlp.lawBook, '', key);
         paragraphs.then(
             p => {
                 // Clear suggestion list if new suggestions were found
@@ -74,8 +77,14 @@ async function getSuggestions() {
             }
         )
     }
+}
 
+function toggleKeywords() {
+    keywordSearch = checkboxKeywords.checked;
 
+    if (suggestionList.innerHTML !== ''){
+        getSuggestions();
+    }
 }
 
 
