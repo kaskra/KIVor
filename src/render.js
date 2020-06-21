@@ -143,6 +143,8 @@ async function getSuggestions() {
 
                 // TODO remove
                 if (p.length === 0) {
+                    dialog.showErrorBox("Kein Ergebnis",
+                        "Es konnten keine passenden Paragraphen gefunden werden.");
                     createEntryInSuggestions("StGB § 223 Körperverletzung", "(1) Wer eine andere " +
                         "Person körperlich mißhandelt oder " +
                         "an der Gesundheit schädigt, wird mit Freiheitsstrafe bis zu fünf Jahren " +
@@ -155,6 +157,9 @@ async function getSuggestions() {
                 addEventToItems();
             }
         )
+    } else {
+        dialog.showErrorBox("Kein Ergebnis",
+            "Es konnten keine Schlüsselwörter gefunden werden.");
     }
 }
 
