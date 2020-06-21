@@ -30,3 +30,11 @@ body {
 .pane {
     border-left: 1px solid rgba(0, 0, 0, .125);
 }
+
+.card-subtitle {
+    color: #757575;
+}
+
+.selected-card {
+    color: #fff;
+}

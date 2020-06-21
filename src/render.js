@@ -30,6 +30,17 @@ function addEventToItems() {
         let text = item.children[2].innerText;
 
         item.onclick = function () {
+            for (let card of suggestionList.children) {
+                card.classList.remove('active');
+                card.children[0].classList.remove('selected-card');
+                card.children[1].classList.remove('selected-card');
+                card.children[2].classList.remove('selected-card');
+            }
+
+            item.classList.add('active');
+            item.children[0].classList.add('selected-card');
+            item.children[1].classList.add('selected-card');
+            item.children[2].classList.add('selected-card');
             detailsTitle.innerText = title + " " + subtitle;
             detailsText.innerText = text;
             detailCard.hidden = false;
@@ -67,7 +78,7 @@ async function getSuggestions() {
 
                 if (p.length === 0) {
                     for (let i = 0; i < 8; i++) {
-                        createEntryInSuggestions("StGB $ 223 Körperverletzung", "(1) Wer eine andere Person körperlich mißhandelt oder an der Gesundheit schädigt, wird mit Freiheitsstrafe bis zu fünf Jahren oder mit Geldstrafe bestraft.\n" +
+                        createEntryInSuggestions("StGB § 223 Körperverletzung", "(1) Wer eine andere Person körperlich mißhandelt oder an der Gesundheit schädigt, wird mit Freiheitsstrafe bis zu fünf Jahren oder mit Geldstrafe bestraft.\n" +
                             "\n" +
                             "(2) Der Versuch ist strafbar.", i);
                     }
@@ -82,7 +93,7 @@ async function getSuggestions() {
 function toggleKeywords() {
     keywordSearch = checkboxKeywords.checked;
 
-    if (suggestionList.innerHTML !== ''){
+    if (suggestionList.innerHTML !== '') {
         getSuggestions();
     }
 }
