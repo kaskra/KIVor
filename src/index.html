@@ -17,7 +17,11 @@
         <div class="pane-group">
             <div class="pane mr-1 header-offset">
                 <div class="card rounded-0">
-                    <div class="card-header rounded-0 fixed-header left">Vorgangsbeschreibung</div>
+                    <div class="card-header rounded-0 fixed-header left">Vorgangsbeschreibung
+                        <a class="col-form-label pl-2" id="text-info"><i
+                                class="icon icon-info"></i>
+                        </a>
+                    </div>
                     <div class="card-body">
                             <textarea class="form-control mb-1 " id="mainTextArea" rows="18"
                                       style="resize:none; "></textarea>
@@ -29,6 +33,10 @@
                                                                             id="paragraph-input"/>
                                 <button class="btn btn-outline-primary ml-1" style="color: #fff" id="search-paragraph">
                                     <i class="icon icon-search"></i>
+                                </button>
+                                <a class="col-form-label pl-2" id="search-info"><i
+                                        class="icon icon-info"></i>
+                                </a>
                             </div>
 
                             <div class="mr-3">
@@ -60,6 +68,9 @@
                 <div class="card-header rounded-0 fixed-header right">Vorschläge
                     <input class="checkbox-inline ml-2" type="checkbox" id="toggleKeywords" checked> Suche nach
                     Keywords</input>
+                    <a class="col-form-label pl-2" id="keyword-info"><i
+                            class="icon icon-info"></i>
+                    </a>
                 </div>
                 <div class="card-body px-0 py-0">
                     <div class="list-group rounded-0" id="suggestionList"></div>
