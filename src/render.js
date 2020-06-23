@@ -83,9 +83,9 @@ function searchByParagraph() {
                 addEventToItems();
             } else {
                 dialog.showErrorBox("Kein Ergebnis",
-                    "Es konnten keine passenden Paragraphen gefunden werden.");
+                    "Es konnten keine passenden Paragraphen gefunden werden.\n\nZeige Beispiel an.");
 
-                // TODO remove
+                // Display example value
                 suggestionList.innerHTML = '';
                 createEntryInSuggestions("StGB § 223 Körperverletzung", "(1) Wer eine andere " +
                     "Person körperlich mißhandelt oder " +
@@ -155,7 +155,6 @@ async function getSuggestions() {
     let text = textArea.value;
 
     let selectedText = window.getSelection().toString();
-    console.log(selectedText.length);
     if (selectedText.length > 0) {
         text = selectedText;
     }
@@ -183,10 +182,10 @@ async function getSuggestions() {
                     createEntryInSuggestions(p[i].title, p[i].text, i);
                 }
 
-                // TODO remove
+                // Display example value
                 if (p.length === 0) {
                     dialog.showErrorBox("Kein Ergebnis",
-                        "Es konnten keine passenden Paragraphen gefunden werden.");
+                        "Es konnten keine passenden Paragraphen gefunden werden.\n\nZeige Beispiel an.");
                     createEntryInSuggestions("StGB § 223 Körperverletzung", "(1) Wer eine andere " +
                         "Person körperlich mißhandelt oder " +
                         "an der Gesundheit schädigt, wird mit Freiheitsstrafe bis zu fünf Jahren " +
@@ -213,19 +212,19 @@ function toggleKeywords() {
 let exampleText = "Um 17:45 Uhr am 17.06.2020 erfolgte die Anweisung durch das FLZ die Siberstraße 19 " +
     "in 71253 Entenhausen anzufahren. Laut einem Anrufer waren dort 2 Männer aneinandergeraten, was " +
     "anschließend in eine körperliche Auseinandersetzung übergegangen wäre. Die Anfahrt erfolgte unter Zuhilfenahme " +
-    "der Sonder- und Wegerechte (§35, §38 StVO).  Vor Ort konnten tatsächlich 2 Männer angetroffen werden, " +
+    "der Sonder- und Wegerechte.  Vor Ort konnten tatsächlich 2 Männer angetroffen werden, " +
     "welche sich vor der Einfahrt des Hauses Nr. 19 der Siberstraße schlugen. Dabei lag der Geschädigte Lauditz " +
     "bereits am Boden und versuchte sich vor den Tritten des Beschuldigten Kessler mit den Armen zu schützen.  " +
     "Da der Beschuldigte Kessler auf keinerlei Zurufe reagierte seine Schläge einzustellen, wurde er umgehend von " +
     "meinem Kollegen M.Hammer mithilfe eines Schockschlages zu Boden gebracht. Kurz darauf versuchte der " +
     "Beschuldigte Kessler zu flüchten und" +
-    " wurde deshalb von mir und meinem Kollegen M. Hammer umgehend vorläufig festgenommen (§127 StPO). Es erfolgte " +
-    "die Belehrung des Beschuldigten gemäß §136 StPO. Der Geschädigte wurde zu seinen Rechten als " +
+    " wurde deshalb von mir und meinem Kollegen M. Hammer umgehend vorläufig festgenommen. Es erfolgte " +
+    "die Belehrung des Beschuldigten gemäß ... . Der Geschädigte wurde zu seinen Rechten als " +
     "Zeugen belehrt. Er erlitt lediglich leichte Prellungen seitlich der rechten " +
     "Rippen sowie Abschürfungen an beiden Unterarmen. Seinen Aussagen zufolge handelte es sich bei dem Beschuldigten" +
     " Kessler um seinen Nachbarn, welcher sich schon seit Wochen darüber aufregte, dass der Geschädigte Lauditz sein " +
     "PKW abends als so parke, dass die Schnauze des Fahrzeuges von der Einfahrt aus noch in den Gehweg hineinrage. " +
-    "Er wünsche einen Strafantrag für die vorliegende Körperverletzung (§223 StGB). Es erfolgte die Aufnahme der " +
+    "Er wünsche einen Strafantrag für die vorliegende Körperverletzung. Es erfolgte die Aufnahme der " +
     "Personalien der Beteiligten, der Geschädigte Lauditz betrat anschließend sein Haus.  " +
     "Der Beschuldigte Kessler wurde zu seiner Haustüre begleitet, er zeigte sich einsichtig und wurde von seiner " +
     "Frau in Empfang genommen. ";
